@@ -20,13 +20,13 @@ export interface UserObjectData {
   name: Name;
   password: Password;
 }
-
+// Entity should not be generic
 export class User extends Entity<UserObjectData> {
   public id: Id;
-  protected address: Address;
-  protected email: Email;
-  protected name: Name;
-  protected password: Password;
+  public readonly email: Email;
+  protected readonly address: Address;
+  protected readonly name: Name;
+  protected readonly password: Password;
 
   private constructor(data: UserObjectData) {
     super(data.id);
@@ -37,6 +37,7 @@ export class User extends Entity<UserObjectData> {
   }
 
   public static create(data: UserData): User {
+    // Add error managment
     const userObjectData: UserObjectData = {
       id: data.id ? Id.create(data.id) : Id.generate(),
       name: Name.create(data.name),
