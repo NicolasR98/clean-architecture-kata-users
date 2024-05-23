@@ -48,4 +48,14 @@ export class User extends Entity<UserObjectData> {
 
     return new User(userObjectData);
   }
+
+  public toData(): UserData {
+    return {
+      id: this.id.value,
+      email: this.email.value,
+      address: this.address.value,
+      name: this.name.value,
+      password: this.password.value,
+    };
+  }
 }
